@@ -1,0 +1,66 @@
+{
+  "name": "@promptpack/langchain",
+  "version": "0.1.0",
+  "description": "LangChain.js integration for PromptPack - AI prompt management system",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "docs": "typedoc",
+    "docs:watch": "typedoc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "promptpack",
+    "langchain",
+    "llm",
+    "prompt",
+    "ai",
+    "template",
+    "multimodal",
+    "prompt-engineering"
+  ],
+  "author": "altairalabs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AltairaLabs/promptpack-langchainjs.git"
+  },
+  "peerDependencies": {
+    "@langchain/core": "^1.0.6",
+    "langchain": "^1.0.6"
+  },
+  "devDependencies": {
+    "@langchain/community": "^1.0.3",
+    "@langchain/core": "^1.0.6",
+    "@langchain/openai": "^1.1.2",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "langchain": "^1.0.6",
+    "prettier": "^3.3.2",
+    "ts-jest": "^29.1.5",
+    "tsx": "^4.7.0",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@langchain/langgraph": "^1.0.2",
+    "chalk": "^5.6.2",
+    "zod": "^3.23.8"
+  }
+}

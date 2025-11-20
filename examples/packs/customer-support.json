@@ -1,0 +1,102 @@
+{
+  "$schema": "https://promptpack.org/schema/v1.0/promptpack.schema.json",
+  "id": "customer-support",
+  "name": "Customer Support Pack",
+  "version": "1.0.0",
+  "description": "Complete customer support prompt pack with multiple task types",
+  "template_engine": {
+    "version": "v1",
+    "syntax": "{{variable}}",
+    "features": ["basic_substitution", "fragments"]
+  },
+  "fragments": {
+    "company_context": "TechCorp provides cloud infrastructure, SaaS products, and enterprise solutions. Key products include: CloudCore (hosting), DataFlow (analytics), and SecureVault (security).",
+    "tone_guidelines": "Maintain a professional yet friendly tone. Be concise and solution-oriented. Acknowledge customer frustration when appropriate.",
+    "response_format": "Structure responses with: 1) Acknowledge the issue, 2) Explain the solution, 3) Provide actionable next steps."
+  },
+  "prompts": {
+    "support": {
+      "id": "support",
+      "name": "Support Agent",
+      "description": "General customer support assistant for handling inquiries",
+      "version": "1.0.0",
+      "system_template": "You are a {{role}} assistant for TechCorp.\n\n# Company Context\n{{company_context}}\n\n# Your Role\nHandle {{issue_type}} customer inquiries effectively.\n\n# Guidelines\n{{tone_guidelines}}\n\n{{response_format}}",
+      "variables": [
+        {
+          "name": "role",
+          "type": "string",
+          "required": true,
+          "description": "The role of the assistant",
+          "example": "customer support"
+        },
+        {
+          "name": "issue_type",
+          "type": "string",
+          "required": false,
+          "default": "general",
+          "description": "Type of issue to handle",
+          "validation": {
+            "enum": ["billing", "technical", "general", "account"]
+          }
+        }
+      ],
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 1500
+      },
+      "validators": [
+        {
+          "type": "banned_words",
+          "enabled": true,
+          "fail_on_violation": true,
+          "params": {
+            "words": ["inappropriate", "offensive"]
+          }
+        },
+        {
+          "type": "max_length",
+          "enabled": true,
+          "fail_on_violation": false,
+          "params": {
+            "max_characters": 2000
+          }
+        }
+      ]
+    },
+    "escalation": {
+      "id": "escalation",
+      "name": "Escalation Handler",
+      "description": "Handles escalated customer issues",
+      "version": "1.0.0",
+      "system_template": "You are a senior support specialist handling escalated {{issue_type}} issues. Be empathetic and solution-focused.",
+      "variables": [
+        {
+          "name": "issue_type",
+          "type": "string",
+          "required": true,
+          "validation": {
+            "enum": ["billing", "technical", "account"]
+          }
+        },
+        {
+          "name": "customer_tier",
+          "type": "string",
+          "required": false,
+          "default": "standard",
+          "validation": {
+            "enum": ["standard", "premium", "enterprise"]
+          }
+        }
+      ],
+      "parameters": {
+        "temperature": 0.6,
+        "max_tokens": 2000
+      }
+    }
+  },
+  "metadata": {
+    "domain": "customer-service",
+    "language": "en",
+    "tags": ["support", "customer-service", "helpdesk"]
+  }
+}

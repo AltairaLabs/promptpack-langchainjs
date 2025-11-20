@@ -1,0 +1,76 @@
+{
+  "$schema": "https://promptpack.org/schema/v1.0/promptpack.schema.json",
+  "id": "support",
+  "name": "Customer Support",
+  "version": "1.0.0",
+  "template_engine": {
+    "version": "v1",
+    "syntax": "{{variable}}"
+  },
+  "prompts": {
+    "responder": {
+      "id": "responder",
+      "name": "Support Responder",
+      "version": "1.0.0",
+      "system_template": "You are a helpful customer support agent. {{feedback}}",
+      "variables": [
+        {
+          "name": "feedback",
+          "type": "string",
+          "required": false,
+          "default": ""
+        }
+      ],
+      "validators": [
+        {
+          "type": "banned_words",
+          "enabled": true,
+          "fail_on_violation": true,
+          "params": {
+            "words": ["stupid", "idiot", "hate"]
+          }
+        },
+        {
+          "type": "pii_detection",
+          "enabled": true,
+          "fail_on_violation": true,
+          "params": {
+            "allow_pii": false
+          }
+        },
+        {
+          "type": "sentiment",
+          "enabled": true,
+          "fail_on_violation": false,
+          "params": {
+            "expected_sentiment": "positive"
+          }
+        }
+      ]
+    },
+    "relaxed": {
+      "id": "relaxed",
+      "name": "Support Responder (Relaxed)",
+      "version": "1.0.0",
+      "system_template": "You are a helpful customer support agent. {{feedback}}",
+      "variables": [
+        {
+          "name": "feedback",
+          "type": "string",
+          "required": false,
+          "default": ""
+        }
+      ],
+      "validators": [
+        {
+          "type": "banned_words",
+          "enabled": true,
+          "fail_on_violation": true,
+          "params": {
+            "words": ["stupid", "idiot"]
+          }
+        }
+      ]
+    }
+  }
+}

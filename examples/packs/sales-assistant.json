@@ -1,0 +1,247 @@
+{
+  "$schema": "https://promptpack.org/schema/v1.0/promptpack.schema.json",
+  "id": "sales-assistant",
+  "name": "Sales Assistant Pack",
+  "version": "1.0.0",
+  "description": "Complete sales assistant with CRM integration tools",
+  "template_engine": {
+    "version": "v1",
+    "syntax": "{{variable}}",
+    "features": ["basic_substitution"]
+  },
+  "tools": {
+    "lookup_customer": {
+      "name": "lookup_customer",
+      "description": "Look up customer information by customer ID or email address. Returns customer details including name, email, account tier, and order history.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "description": "The unique customer ID (e.g., CUST-12345)"
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email address as alternative lookup method"
+          }
+        },
+        "required": ["customer_id"]
+      }
+    },
+    "check_inventory": {
+      "name": "check_inventory",
+      "description": "Check current inventory levels for a product. Returns available quantity, warehouse location, and estimated restock date if out of stock.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "The product SKU or ID (e.g., PRD-ABC-123)"
+          },
+          "warehouse": {
+            "type": "string",
+            "description": "Specific warehouse code to check (optional, defaults to all warehouses)"
+          }
+        },
+        "required": ["product_id"]
+      }
+    },
+    "create_order": {
+      "name": "create_order",
+      "description": "Create a new sales order for a customer. Returns order confirmation with order ID and estimated delivery date.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "description": "Customer ID for the order"
+          },
+          "items": {
+            "type": "array",
+            "description": "List of items to include in the order",
+            "items": {
+              "type": "object",
+              "properties": {
+                "product_id": {
+                  "type": "string",
+                  "description": "Product SKU"
+                },
+                "quantity": {
+                  "type": "number",
+                  "description": "Quantity to order"
+                }
+              },
+              "required": ["product_id", "quantity"]
+            }
+          },
+          "shipping_address": {
+            "type": "string",
+            "description": "Shipping address (optional if using customer default)"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["standard", "express", "overnight"],
+            "description": "Shipping priority level"
+          }
+        },
+        "required": ["customer_id", "items"]
+      }
+    },
+    "calculate_discount": {
+      "name": "calculate_discount",
+      "description": "Calculate available discounts for a customer and order. Returns discount percentage and any applicable promo codes.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "description": "Customer ID to check for loyalty discounts"
+          },
+          "order_total": {
+            "type": "number",
+            "description": "Total order amount before discounts"
+          },
+          "promo_code": {
+            "type": "string",
+            "description": "Optional promo code to validate"
+          }
+        },
+        "required": ["customer_id", "order_total"]
+      }
+    },
+    "check_order_status": {
+      "name": "check_order_status",
+      "description": "Check the current status of an existing order. Returns order status, tracking number, and estimated delivery date.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "The order ID to check (e.g., ORD-2025-12345)"
+          }
+        },
+        "required": ["order_id"]
+      }
+    }
+  },
+  "prompts": {
+    "sales": {
+      "id": "sales",
+      "name": "Sales Representative",
+      "description": "Full-featured sales agent with access to all CRM tools",
+      "version": "1.0.0",
+      "system_template": "You are a {{role}} for {{company}}. You help customers with orders, product inquiries, and account management.\n\nYou have access to the following capabilities:\n- Look up customer information\n- Check product inventory\n- Create new orders\n- Calculate discounts\n- Check order status\n\nAlways be professional, friendly, and proactive in helping customers.",
+      "variables": [
+        {
+          "name": "role",
+          "type": "string",
+          "required": false,
+          "default": "sales representative",
+          "description": "The role title"
+        },
+        {
+          "name": "company",
+          "type": "string",
+          "required": true,
+          "description": "Company name"
+        }
+      ],
+      "tools": [
+        "lookup_customer",
+        "check_inventory",
+        "create_order",
+        "calculate_discount",
+        "check_order_status"
+      ],
+      "tool_policy": {
+        "tool_choice": "auto",
+        "max_rounds": 5,
+        "max_tool_calls_per_turn": 10,
+        "blocklist": []
+      },
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 1500
+      },
+      "validators": [
+        {
+          "type": "banned_words",
+          "enabled": true,
+          "fail_on_violation": false,
+          "params": {
+            "words": ["inappropriate", "unprofessional"]
+          }
+        }
+      ]
+    },
+    "inquiry": {
+      "id": "inquiry",
+      "name": "Customer Inquiry Handler",
+      "description": "Read-only customer service agent for answering questions",
+      "version": "1.0.0",
+      "system_template": "You are a customer service agent for {{company}}. Help customers by answering questions about products, inventory, and existing orders.\n\nYou can look up information but cannot create or modify orders. For order changes, direct customers to speak with a sales representative.",
+      "variables": [
+        {
+          "name": "company",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "tools": [
+        "lookup_customer",
+        "check_inventory",
+        "check_order_status"
+      ],
+      "tool_policy": {
+        "tool_choice": "auto",
+        "max_rounds": 3,
+        "max_tool_calls_per_turn": 5,
+        "blocklist": ["create_order"]
+      },
+      "parameters": {
+        "temperature": 0.6,
+        "max_tokens": 1000
+      }
+    },
+    "order_specialist": {
+      "id": "order_specialist",
+      "name": "Order Specialist",
+      "description": "Specialized agent focused on order creation and management",
+      "version": "1.0.0",
+      "system_template": "You are an order specialist for {{company}}. Your primary role is to help customers place orders efficiently.\n\nBefore creating an order:\n1. Look up customer information\n2. Check inventory availability\n3. Calculate applicable discounts\n4. Confirm all details with the customer\n5. Create the order\n\nAlways provide order confirmation and estimated delivery dates.",
+      "variables": [
+        {
+          "name": "company",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "tools": [
+        "lookup_customer",
+        "check_inventory",
+        "create_order",
+        "calculate_discount"
+      ],
+      "tool_policy": {
+        "tool_choice": "auto",
+        "max_rounds": 8,
+        "max_tool_calls_per_turn": 15,
+        "blocklist": []
+      },
+      "parameters": {
+        "temperature": 0.5,
+        "max_tokens": 2000
+      }
+    }
+  },
+  "metadata": {
+    "domain": "sales",
+    "language": "en",
+    "tags": ["sales", "crm", "orders", "customer-service"],
+    "cost_estimate": {
+      "min_cost_usd": 0.002,
+      "max_cost_usd": 0.015,
+      "avg_cost_usd": 0.007
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://promptpack.org/schema/v1.0/promptpack.schema.json",
+  "id": "image-analyzer",
+  "name": "Image Analysis Pack",
+  "version": "1.0.0",
+  "description": "Multimodal pack for analyzing images with vision models",
+  "template_engine": {
+    "version": "v1",
+    "syntax": "{{variable}}",
+    "features": ["basic_substitution"]
+  },
+  "prompts": {
+    "analyze": {
+      "id": "analyze",
+      "name": "Image Analyzer",
+      "description": "Analyzes images and provides detailed descriptions",
+      "version": "1.0.0",
+      "system_template": "You are an expert image analyst. Provide detailed, accurate descriptions of images focusing on {{focus_area}}.",
+      "variables": [
+        {
+          "name": "focus_area",
+          "type": "string",
+          "required": false,
+          "default": "all aspects",
+          "description": "What to focus on in the analysis",
+          "example": "technical details"
+        }
+      ],
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 1000
+      },
+      "media": {
+        "enabled": true,
+        "supported_types": ["image"],
+        "image": {
+          "max_size_mb": 20,
+          "allowed_formats": ["jpeg", "png", "webp"],
+          "default_detail": "high",
+          "max_images_per_msg": 5
+        },
+        "examples": [
+          {
+            "name": "simple-image-analysis",
+            "description": "Basic image analysis with a single photo",
+            "role": "user",
+            "parts": [
+              {
+                "type": "text",
+                "text": "What's in this image?"
+              },
+              {
+                "type": "image",
+                "media": {
+                  "url": "https://example.com/photo.jpg",
+                  "mime_type": "image/jpeg",
+                  "detail": "high",
+                  "caption": "Sample photo for analysis"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "compare": {
+      "id": "compare",
+      "name": "Image Comparator",
+      "description": "Compares multiple images",
+      "version": "1.0.0",
+      "system_template": "You are an expert at comparing images. Analyze the differences and similarities between the provided images.",
+      "parameters": {
+        "temperature": 0.5,
+        "max_tokens": 1500
+      },
+      "media": {
+        "enabled": true,
+        "supported_types": ["image"],
+        "image": {
+          "max_size_mb": 20,
+          "allowed_formats": ["jpeg", "png", "webp"],
+          "default_detail": "high",
+          "max_images_per_msg": 5
+        }
+      }
+    }
+  },
+  "metadata": {
+    "domain": "computer-vision",
+    "language": "en",
+    "tags": ["image", "vision", "analysis", "multimodal"]
+  }
+}
