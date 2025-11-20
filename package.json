@@ -27,8 +27,9 @@
     "prompt",
     "ai",
     "template",
-    "multimodal",
-    "prompt-engineering"
+    "prompt-engineering",
+    "validation",
+    "tools"
   ],
   "author": "altairalabs",
   "license": "MIT",
