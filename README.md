@@ -118,6 +118,7 @@ console.log(response.content);
 - **[Core Concepts](./docs/core-concepts.md)** - Registry, templates, variables
 - **[Tools](./docs/tools.md)** - Function calling with governance
 - **[Validators](./docs/validators.md)** - Response validation and guardrails
+- **[Releasing](./docs/releasing.md)** - How to publish new versions to npm
 - **[API Reference](./docs/api-reference.md)** - Complete API documentation
 - **[Examples](./docs/examples.md)** - Code examples and tutorials
 
@@ -226,14 +227,39 @@ For advanced features like model overrides, fragments, pipelines, and caching, s
 
 ## Contributing
 
-Contributions welcome! See our contributing guidelines.
+We welcome contributions from the community! Whether you're fixing bugs, adding features, improving documentation, or helping others, your contributions are valued.
+
+**Quick Links:**
+
+- **[Contributing Guide](./CONTRIBUTING.md)** - How to contribute
+- **[Code of Conduct](./CODE_OF_CONDUCT.md)** - Community standards
+- **[Governance](./GOVERNANCE.md)** - Project structure
+- **[Security Policy](./SECURITY.md)** - Report security issues
+
+**Ways to Contribute:**
+
+- 🐛 [Report bugs](https://github.com/AltairaLabs/promptpack-langchainjs/issues/new?template=bug_report.md)
+- ✨ [Request features](https://github.com/AltairaLabs/promptpack-langchainjs/issues/new?template=feature_request.md)
+- 📖 [Improve documentation](https://github.com/AltairaLabs/promptpack-langchainjs/issues/new?template=documentation.md)
+- 💬 [Join discussions](https://github.com/AltairaLabs/promptpack-langchainjs/discussions)
+- 🔧 Submit pull requests
 
 ## License
 
-MIT
+MIT - see [LICENSE](./LICENSE) for details.
 
 ## Links
 
-- [PromptPack Specification](https://promptpack.org)
-- [LangChain.js](https://js.langchain.com/)
-- [GitHub Repository](https://github.com/AltairaLabs/prommptpack-langchainjs)
+- **[PromptPack Specification](https://promptpack.org)** - Official PromptPack docs
+- **[LangChain.js](https://js.langchain.com/)** - LangChain documentation
+- **[GitHub Repository](https://github.com/AltairaLabs/promptpack-langchainjs)** - Source code
+- **[npm Package](https://www.npmjs.com/package/@promptpack/langchain)** - Published package
+- **[Issue Tracker](https://github.com/AltairaLabs/promptpack-langchainjs/issues)** - Report bugs
+- **[Discussions](https://github.com/AltairaLabs/promptpack-langchainjs/discussions)** - Community Q&A
+
+## Support
+
+- 📖 Check the [documentation](./docs/)
+- 💬 Ask in [GitHub Discussions](https://github.com/AltairaLabs/promptpack-langchainjs/discussions)
+- 🐛 Report bugs via [GitHub Issues](https://github.com/AltairaLabs/promptpack-langchainjs/issues)
+- 🔒 Security issues: [security@altairalabs.ai](mailto:security@altairalabs.ai)

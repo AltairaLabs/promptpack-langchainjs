@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/AltairaLabs/promptpack-langchainjs/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Documentation
+    url: https://github.com/AltairaLabs/promptpack-langchainjs/tree/main/docs
+    about: Read the comprehensive documentation
+  - name: Security Issues
+    url: mailto:security@altairalabs.ai
+    about: Report security vulnerabilities privately

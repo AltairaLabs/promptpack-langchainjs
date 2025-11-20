@@ -1,0 +1,28 @@
+# Global owners (all files)
+*                                   @AltairaLabs/maintainers
+
+# Core source code
+/src/**                             @AltairaLabs/maintainers
+
+# Configuration and build
+/package.json                       @AltairaLabs/maintainers
+/package-lock.json                  @AltairaLabs/maintainers
+/tsconfig.json                      @AltairaLabs/maintainers
+/jest.config.js                     @AltairaLabs/maintainers
+
+# CI/CD and workflows
+/.github/workflows/**               @AltairaLabs/maintainers
+/.github/CODEOWNERS                 @AltairaLabs/maintainers
+
+# Documentation
+/docs/**                            @AltairaLabs/maintainers
+/*.md                               @AltairaLabs/maintainers
+
+# Security and governance
+/SECURITY.md                        @AltairaLabs/maintainers
+/CODE_OF_CONDUCT.md                 @AltairaLabs/maintainers
+/GOVERNANCE.md                      @AltairaLabs/maintainers
+/CONTRIBUTING.md                    @AltairaLabs/maintainers
+
+# Examples
+/examples/**                        @AltairaLabs/maintainers
