@@ -2,9 +2,11 @@
 
 [![npm version](https://badge.fury.io/js/@promptpack%2Flangchain.svg)](https://www.npmjs.com/package/@promptpack/langchain)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/AltairaLabs/promptpack-langchainjs/actions/workflows/ci.yml/badge.svg)](https://github.com/AltairaLabs/promptpack-langchainjs/actions/workflows/ci.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AltairaLabs_promptpack-langchainjs&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AltairaLabs_promptpack-langchainjs)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AltairaLabs_promptpack-langchainjs&metric=coverage)](https://sonarcloud.io/summary/new_code?id=AltairaLabs_promptpack-langchainjs)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=AltairaLabs_promptpack-langchainjs&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=AltairaLabs_promptpack-langchainjs)
+[![CodeQL](https://github.com/AltairaLabs/promptpack-langchainjs/actions/workflows/codeql.yml/badge.svg)](https://github.com/AltairaLabs/promptpack-langchainjs/actions/workflows/codeql.yml)
 
 LangChain.js integration for [PromptPack](https://promptpack.org) - organize, version, and manage AI prompts with built-in governance and tools.
 

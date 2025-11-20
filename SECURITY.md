@@ -123,6 +123,32 @@ PromptPack templates use variable substitution. While the engine escapes variabl
 
 Use validators and tool policies to mitigate these risks.
 
+## Automated Security Scanning
+
+This repository uses multiple automated security tools:
+
+### Dependabot
+
+- **Dependency Updates**: Weekly automated PRs for outdated dependencies
+- **Security Alerts**: Automatic alerts for known vulnerabilities
+- **Auto-merge**: Security patches can be auto-merged after CI passes
+
+View alerts: [Security → Dependabot alerts](https://github.com/AltairaLabs/promptpack-langchainjs/security/dependabot)
+
+### CodeQL Analysis
+
+- **Static Analysis**: Weekly code scanning for security vulnerabilities
+- **Pull Request Scans**: Automatic analysis on all PRs
+- **Security Queries**: Extended security and quality checks
+
+View results: [Security → Code scanning](https://github.com/AltairaLabs/promptpack-langchainjs/security/code-scanning)
+
+### npm audit
+
+- **CI Integration**: Runs on every commit
+- **Dependency Scanning**: Checks for known vulnerabilities in dependencies
+- **Audit Level**: Fails on moderate and above vulnerabilities
+
 ## Security Updates
 
 Security updates are distributed through:
@@ -130,6 +156,7 @@ Security updates are distributed through:
 - **GitHub Releases**: Tagged releases with security fixes
 - **Security Advisories**: GitHub security advisories for critical issues
 - **npm**: Updated package versions
+- **Dependabot PRs**: Automated dependency updates
 - **Documentation**: Updated security documentation and guidelines
 
 Subscribe to repository notifications to stay informed.
